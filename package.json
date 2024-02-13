@@ -2,11 +2,19 @@
   "name": "kicochall",
   "version": "1.0.0",
   "main": "dist/main.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc",
+    "start": "node .",
+    "clean": "rimraf dist",
+    "start:dev": "nodemon -e .ts --exec \"pnpm clean && pnpm build && pnpm start || exit 0\""
+  },
   "author": "Minhyeok Park <pmh_only@pmh.codes>",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "chalk": "^4.1.2",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.3",
+    "moment": "^2.30.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.0",
@@ -15,6 +23,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^3.0.3",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   }
 }

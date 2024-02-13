@@ -1,1 +1,3 @@
-console.log('Hello, world!')
+import { GatewayClient } from './gateway_client/GatewayClient'
+
+GatewayClient.run()
