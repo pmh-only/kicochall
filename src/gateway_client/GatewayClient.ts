@@ -19,19 +19,22 @@ export class GatewayClient extends Client {
   constructor () {
     super(constants.GATEWAY_CLIENT_OPTIONS)
 
-    void this.loadEventHandlers()
+    process.setMaxListeners(Infinity)
+
+    void this.loadEventHandlerImplements('event_handler/implements')
+    void this.loadEventHandlerImplements('kico_challenges')
     void this.login(constants.BOT_TOKEN)
   }
 
-  private async loadEventHandlers (): Promise<void> {
-    const handlerImplementsPath =
-      path.join(__dirname, '../event_handler/implements')
+  private async loadEventHandlerImplements (implementDirectoryPath: string): Promise<void> {
+    const implementFullDirectoryPath =
+      path.join(__dirname, '..', implementDirectoryPath)
 
-    const handlerImplements =
-      await fs.readdir(handlerImplementsPath)
+    const implementNames =
+      await fs.readdir(implementFullDirectoryPath)
 
-    for (const handlerImplement of handlerImplements) {
-      void import(path.join(handlerImplementsPath, handlerImplement))
+    for (const implementName of implementNames) {
+      void import(path.join(implementFullDirectoryPath, implementName))
         // eslint-disable-next-line new-cap
         .then((v) => new v.default())
     }

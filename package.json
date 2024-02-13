@@ -6,11 +6,13 @@
     "build": "tsc",
     "start": "node .",
     "clean": "rimraf dist",
+    "regist": "pnpm clean && pnpm build && node dist/regist",
     "start:dev": "nodemon -e .ts --exec \"pnpm clean && pnpm build && pnpm start || exit 0\""
   },
   "author": "Minhyeok Park <pmh_only@pmh.codes>",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/builders": "^1.7.0",
     "chalk": "^4.1.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.3",
