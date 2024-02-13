@@ -3,7 +3,7 @@ kimu coding challenge repo
 
 ## missions
 ![](docs/missions/mission01.png)
-done: [src\kico_challenges\01-HelloCommand.ts](src\kico_challenges\01-HelloCommand.ts)
+done: [src/kico_challenges/01-HelloCommand.ts](src/kico_challenges/01-HelloCommand.ts)
 
 ---
 
