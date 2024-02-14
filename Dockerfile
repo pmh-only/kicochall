@@ -16,6 +16,12 @@ COPY package.json pnpm-lock.yaml /app/
 
 RUN pnpm i
 
+COPY ./prisma/ /app/prisma/
+
+RUN pnpm prisma generate
+
+RUN cp -r node_modules/.pnpm/@prisma+client*/ /app/@prisma+client/
+
 COPY tsconfig.json /app/
 
 COPY src /app/src/
@@ -35,6 +41,7 @@ FROM alpine-nodejs AS runtime
 WORKDIR /app
 
 COPY --from=dependencies /app/node_modules /app/node_modules
+COPY --from=builder /app/@prisma+client /app/node_modules/@prisma/client/
 COPY --from=builder /app/dist /app/dist
 
 ENTRYPOINT ["node", "dist/main.js"]
