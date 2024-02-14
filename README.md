@@ -13,7 +13,7 @@ finished
 ---
 
 ![](docs/missions/mission03.png)
-unfinished
+finished: [src/kico_challenges/03-AskAndRespond.ts](src/kico_challenges/03-AskAndRespond.ts)
 
 ---
 

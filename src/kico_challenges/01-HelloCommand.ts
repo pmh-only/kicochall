@@ -1,24 +1,25 @@
-import { type Interaction, type Client, InteractionType, ApplicationCommandType } from 'discord.js'
+import { type Client, InteractionType, ApplicationCommandType, type ChatInputCommandInteraction } from 'discord.js'
 import { EventHandler } from '../event_handler/EventHandler'
 import { type Logger } from '../logger/Logger'
+import { type DatabaseClient } from '../database_client/DatabaseClient'
 
 @EventHandler('interactionCreate')
 export default class HelloCommand {
   public readonly client!: Client<true>
   public readonly logger!: Logger
+  public readonly db!: DatabaseClient
 
-  public async onEvent (interaction: Interaction): Promise<void> {
-    // 1. 이벤트 필터링
-    if (interaction.type !== InteractionType.ApplicationCommand)
-      return
+  // ---
 
-    if (interaction.commandType !== ApplicationCommandType.ChatInput)
-      return
-
-    if (interaction.commandName !== '안녕')
-      return
-
-    // 2. 안녕 출력
-    await interaction.reply('안녕!')
+  public async onEvent (interaction: ChatInputCommandInteraction): Promise<void> {
+    if (this.isCorrectInteraction(interaction))
+      await interaction.reply('안녕!')
   }
+
+  // ---
+
+  private readonly isCorrectInteraction = (interaction: ChatInputCommandInteraction): boolean =>
+    interaction.type === InteractionType.ApplicationCommand &&
+    interaction.commandType === ApplicationCommandType.ChatInput &&
+    interaction.commandName === '안녕'
 }

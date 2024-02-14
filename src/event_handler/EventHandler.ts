@@ -1,6 +1,7 @@
 import { type ClientEvents, type Client, type Awaitable } from 'discord.js'
 import { GatewayClient } from '../gateway_client/GatewayClient'
 import { Logger } from '../logger/Logger'
+import { DatabaseClient } from '../database_client/DatabaseClient'
 
 export class BasicEventHandler<EventType extends keyof ClientEvents> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -9,6 +10,8 @@ export class BasicEventHandler<EventType extends keyof ClientEvents> {
   public readonly client!: Client
 
   public readonly logger!: Logger
+
+  public readonly db!: DatabaseClient
 
   public onEvent (...args: ClientEvents[EventType]): Awaitable<void> {
 
@@ -22,6 +25,8 @@ export const EventHandler =
         public client = GatewayClient.getInstance()
 
         public logger = Logger.getInstance(target.name)
+
+        public db = DatabaseClient.getInstance()
 
         constructor (..._: any[]) {
           super()
